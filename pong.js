@@ -35,6 +35,7 @@ function refreshCanvas(){
     clearCanvas();
     updateBall();
     createRect(paddleX, 380, 100, 20, "black");
+    createText("Speed: " + Math.abs(ballYChange), 10, 30, "black");
 }
 
 //Updates the position of the ball automatically
@@ -62,16 +63,16 @@ function iterationCheck(){
     iteration++;
     if(iteration % 2 == 0){
         if(ballXChange > 0){
-            ballXChange = ballXChange + .3;
+            ballXChange = ballXChange + .5;
         }
         else{
-            ballXChange = ballXChange - .3;
+            ballXChange = ballXChange - .5;
         }
         if(ballYChange > 0){
-            ballYChange = ballYChange + .3;
+            ballYChange = ballYChange + .5;
         }
         else{
-            ballYChange = ballYChange - .3;
+            ballYChange = ballYChange - .5;
         }
     }
 }
@@ -89,6 +90,13 @@ function createCircle(x, y, r, color){
     game.arc(x, y, r, 0, Math.PI*2, false);
     game.closePath();
     game.fill();
+}
+
+//Creates text
+function createText(text, x, y, color){
+    game.fillStyle = color;
+    game.font = "20px Arial";
+    game.fillText(text, x, y);
 }
 
 //Create the white overlay
@@ -111,8 +119,10 @@ function gameOver(){
     canvas.style.opacity = 0;
     gameOverC.style.opacity = 0;
     gameOverC.style.display = "block";
+    
     setTimeout(function(){
         gameOverC.style.opacity = 1;
         canvas.style.display = "none";
+        document.getElementById("gameScore").innerHTML = "Score: " + iteration;
     }, 1000);
 }
