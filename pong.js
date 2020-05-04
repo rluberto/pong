@@ -115,11 +115,10 @@ document.onkeydown = function(event){
 
 //End the game
 function gameOver(){
-    gameLoop = null;
+    gameLoop = clearInterval();
     canvas.style.opacity = 0;
     gameOverC.style.opacity = 0;
     gameOverC.style.display = "block";
-    
     setTimeout(function(){
         gameOverC.style.opacity = 1;
         canvas.style.display = "none";
