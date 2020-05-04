@@ -36,6 +36,7 @@ function refreshCanvas(){
     updateBall();
     createRect(paddleX, 380, 100, 20, "black");
     createText("Speed: " + Math.abs(ballYChange), 10, 30, "black");
+    createText("Score: " + iteration, 10, 60, "black");
 }
 
 //Updates the position of the ball automatically
@@ -43,12 +44,12 @@ function updateBall(){
     if(ballY >= 370 && ballX >= paddleX && ballX <= paddleX+100){ //If the ball hits the paddle change directions
         ballYChange = 0 - ballYChange;
         ballXChange = Math.floor(Math.random() * 2) - Math.floor(Math.random() + 1 * 2);
+        iterationCheck();
     }
     if(ballY < 10){ //If the ball hits the top change directions
         ballYChange = 0 - ballYChange;
-        iterationCheck();
     }
-    if(ballX > 590 || ballX < 10){
+    if(ballX > 590 || ballX < 10){ //If the ball hits the sides of the canvas
         ballXChange = 0 - ballXChange;
     }
     if(ballY > 410){ //If the ball hits the bottom of the canvas end the game
@@ -116,6 +117,8 @@ document.onkeydown = function(event){
 //End the game
 function gameOver(){
     gameLoop = clearInterval();
+    ballXChange = 0;
+    ballYChange = 0;
     canvas.style.opacity = 0;
     gameOverC.style.opacity = 0;
     gameOverC.style.display = "block";
