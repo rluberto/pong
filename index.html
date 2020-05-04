@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" href="stylesheets/index.css">
 
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -15,6 +17,12 @@
         <h3>Instructions</h3>
         <p>Use the left and right arrow keys on your keyboard to move the paddle.</p>
         <button onclick="init()">Start Game</button>
+    </div>
+    <div id="gameOver">
+        <h1>Pong</h1>
+        <h3 color="red">Game Over</h3>
+        <p>You lost the game.</p>
+        <button onclick="window.location.href=''">Start Over</button>
     </div>
     <canvas id="pongCanvas" width="600" height="400"></canvas>
     <script src="pong.js"></script>

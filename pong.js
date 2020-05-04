@@ -1,7 +1,8 @@
-//Initialize the canvas
+//Initialize the elements
 const canvas = document.getElementById("pongCanvas");
 const game = canvas.getContext("2d");
 const welcome = document.getElementById("welcome");
+const gameOverC = document.getElementById("gameOver");
 
 //Initialize the dynamic coordinates for the game elements
 let paddleX = 250;
@@ -15,11 +16,13 @@ function init(){
     canvas.style.display = "block";
     canvas.style.opacity = 0;
     welcome.style.opacity = 0;
+    gameOverC.style.opacity = 0;
     setTimeout(function(){
         createRect(paddleX, 380, 100, 20, "black"); //Create the paddle in the initial position
         createCircle(ballX, ballY, 10, "blue"); //Create the ball in the initial position
         canvas.style.opacity = 1;
         welcome.style.display = "none";
+        gameOverC.style.display = "none";
     }, 1000);
     setTimeout(function() {
         let gameLoop = setInterval(refreshCanvas, 1000/50); //Loop the game by refreshing the canvas 50 times per second
@@ -86,4 +89,14 @@ document.onkeydown = function(event){
     if(event.keyCode == 39 && paddleX < 500){ //If the right key is pressed and not out of bounds
         paddleX+=8;
     }
+}
+
+function gameOver(){
+    canvas.style.opacity = 0;
+    gameOverC.style.opacity = 0;
+    gameOverC.style.display = "block";
+    setTimeout(function(){
+        gameOverC.style.opacity = 1;
+        canvas.style.display = "none";
+    }, 1000);
 }

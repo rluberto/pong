@@ -4,6 +4,7 @@ body{
     background-image: url('../pictures/hhs.png');
     background-size: cover;
     background-attachment: fixed;
+    font-family: 'Press Start 2P', cursive;
 }
 
 #welcome{
@@ -26,11 +27,17 @@ button{
     color: white;
     border: none;
     font-size: 16px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+button:hover{
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 #pongCanvas{
     background-color: white;
-    border: 1px solid black;
+    border: 3px solid blue;
     position: relative;
     display: none;
     left: 0;
@@ -39,4 +46,19 @@ button{
     top: 50%;
     transform: translateY(50%);
     transition: 1s ease;
+}
+
+#gameOver{
+    height: auto;
+    max-width: 50%;
+    background-color: rgba(255, 255, 255, 0.50);
+    position: absolute;
+    display: none;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transform: translateY(50%);
+    text-align: center;
+    transition: 1s ease;
+    padding: 20px;
 }
