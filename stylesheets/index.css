@@ -1,0 +1,19 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-image: url('../pictures/hhs.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#pongCanvas{
+    background-color: white;
+    border: 1px solid black;
+    position: relative;
+    display: block;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 50%;
+    transform: translateY(50%);
+}
