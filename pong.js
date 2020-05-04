@@ -9,7 +9,8 @@ let paddleX = 250;
 let ballX = 300;
 let ballY = 200;
 let ballXChange = 0;
-let ballYChange = 2;
+let ballYChange = 1;
+let iteration = 0;
 
 //Initialize the game
 function init(){
@@ -39,11 +40,12 @@ function refreshCanvas(){
 //Updates the position of the ball automatically
 function updateBall(){
     if(ballY >= 370 && ballX >= paddleX && ballX <= paddleX+100){ //If the ball hits the paddle change directions
-        ballYChange = -2;
+        ballYChange = 0 - ballYChange;
         ballXChange = Math.floor(Math.random() * 2) - Math.floor(Math.random() + 1 * 2);
     }
     if(ballY < 10){ //If the ball hits the top change directions
-        ballYChange = 2;
+        ballYChange = 0 - ballYChange;
+        iterationCheck();
     }
     if(ballX > 590 || ballX < 10){
         ballXChange = 0 - ballXChange;
@@ -54,6 +56,24 @@ function updateBall(){
     ballX += ballXChange;
     ballY += ballYChange;
     createCircle(ballX, ballY, 10, "blue");
+}
+
+function iterationCheck(){
+    iteration++;
+    if(iteration % 2 == 0){
+        if(ballXChange > 0){
+            ballXChange = ballXChange + .3;
+        }
+        else{
+            ballXChange = ballXChange - .3;
+        }
+        if(ballYChange > 0){
+            ballYChange = ballYChange + .3;
+        }
+        else{
+            ballYChange = ballYChange - .3;
+        }
+    }
 }
 
 //Creates a rectangle
@@ -71,27 +91,23 @@ function createCircle(x, y, r, color){
     game.fill();
 }
 
-//Creates text
-function createText(text, x, y, color){
-    game.fillStyle = color;
-    game.font = "75px fantasy";
-    game.fillText(text, x, y);
-}
-
+//Create the white overlay
 function clearCanvas(){
     createRect(0, 0, 600, 400, "white");
 }
 
 document.onkeydown = function(event){
     if(event.keyCode == 37 && paddleX > 0){ //If the left key is pressed and not out of bounde
-        paddleX-=8;
+        paddleX-=10;
     }
     if(event.keyCode == 39 && paddleX < 500){ //If the right key is pressed and not out of bounds
-        paddleX+=8;
+        paddleX+=10;
     }
 }
 
+//End the game
 function gameOver(){
+    gameLoop = null;
     canvas.style.opacity = 0;
     gameOverC.style.opacity = 0;
     gameOverC.style.display = "block";
