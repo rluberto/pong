@@ -1,6 +1,7 @@
-//Initialize the elements
+//Assign a variable for the canvas and game drawing methods
 const canvas = document.getElementById("pongCanvas");
 const game = canvas.getContext("2d");
+//Assign a variable for the welcome screen and game over screen
 const welcome = document.getElementById("welcome");
 const gameOverC = document.getElementById("gameOver");
 
@@ -14,14 +15,14 @@ let iteration = 0;
 
 //Initialize the game
 function init(){
-    canvas.style.display = "block";
+    canvas.style.display = "block"; //Get rid of the welcome screen and get the game canvas ready to fade in
     canvas.style.opacity = 0;
     welcome.style.opacity = 0;
     gameOverC.style.opacity = 0;
     setTimeout(function(){
         createRect(paddleX, 380, 100, 20, "black"); //Create the paddle in the initial position
         createCircle(ballX, ballY, 10, "blue"); //Create the ball in the initial position
-        canvas.style.opacity = 1;
+        canvas.style.opacity = 1; //Fade in the game screen and fully remove the inviisble welcome screen
         welcome.style.display = "none";
         gameOverC.style.display = "none";
     }, 1000);
@@ -41,9 +42,12 @@ function refreshCanvas(){
 
 //Updates the position of the ball automatically
 function updateBall(){
-    if(ballY >= 370 && ballX >= paddleX && ballX <= paddleX+100){ //If the ball hits the paddle change directions
+    if(ballY >= 370 && ballY < 371 && ballX >= paddleX && ballX <= paddleX+100){ //If the ball hits the paddle change directions
         ballYChange = 0 - ballYChange;
-        ballXChange = Math.floor(Math.random() * 2) - Math.floor(Math.random() + 1 * 2);
+        ballXChange = Math.floor(Math.random() * 4) - (Math.random() + 1 * 2);
+        while(ballXChange == 1){
+            ballXChange = Math.floor(Math.random() * 4) - (Math.random() + 1 * 2);
+        }
         iterationCheck();
     }
     if(ballY < 10){ //If the ball hits the top change directions
@@ -55,20 +59,15 @@ function updateBall(){
     if(ballY > 410){ //If the ball hits the bottom of the canvas end the game
         gameOver();
     }
-    ballX += ballXChange;
+    ballX += ballXChange; //Update the ball position by adding the assigned speed
     ballY += ballYChange;
     createCircle(ballX, ballY, 10, "blue");
 }
 
+//Handles the scoring aspect of the game
 function iterationCheck(){
-    iteration++;
-    if(iteration % 2 == 0){
-        if(ballXChange > 0){
-            ballXChange = ballXChange + .5;
-        }
-        else{
-            ballXChange = ballXChange - .5;
-        }
+    iteration++; //Add 1 to the score
+    if(iteration % 2 == 0){ //If the score is evenly divided by 2, increase the speed by .5
         if(ballYChange > 0){
             ballYChange = ballYChange + .5;
         }
