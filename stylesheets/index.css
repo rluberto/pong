@@ -8,7 +8,7 @@ body{
 }
 
 #welcome{
-    min-height: 40vh;
+    min-height: auto;
     max-width: 50%;
     background-color: rgba(255, 255, 255, 0.50);
     position: absolute;
@@ -21,13 +21,6 @@ body{
     text-align: center;
     transition: 1s ease;
     padding: 40px;
-}
-
-#welcomeContent{
-    position: relative;
-    display: block;
-    top: -50%;
-    transform: translateY(50%);
 }
 
 button{
@@ -59,7 +52,7 @@ button:hover{
 }
 
 #gameOver{
-    min-height: 40vh;
+    height: auto;
     max-width: 50%;
     background-color: rgba(255, 255, 255, 0.50);
     position: absolute;
@@ -72,11 +65,4 @@ button:hover{
     text-align: center;
     transition: 1s ease;
     padding: 40px;
-}
-
-#gameOverContent{
-    position: relative;
-    display: block;
-    top: -50%;
-    transform: translateY(50%);
 }
